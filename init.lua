@@ -88,7 +88,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -257,10 +257,10 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  -- require 'custom.plugins.autoformat',
+  -- require 'custom.plugins.debug',
 
-   --- Configuration for jupynium.nvim
+  --- Configuration for jupynium.nvim
   {
     "kiyoon/jupynium.nvim",
     -- build = "pip3 install --user .",
@@ -269,7 +269,7 @@ require('lazy').setup({
     -- Uncomment the next line if you want to enable only when the jupynium environment is found
     -- enabled = vim.fn.isdirectory(vim.fn.expand "~/miniconda3/envs/jupynium"),
   },
-  
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -321,31 +321,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
-
---- Custom keymaps
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
-vim.keymap.set('n', '<F5>', ':JupyniumStartAndAttachToServer<CR>', { noremap=true, silent = true })
-vim.keymap.set('n', '<F2>', ':JupyniumLoadFromIpynbTabAndStartSync 2<CR>', { noremap=true, silent = true })
-vim.keymap.set('n', '<F3>', ':JupyniumLoadFromIpynbTabAndStartSync 3<CR>', { noremap=true, silent = true })
-vim.keymap.set('n', '<F4>', ':JupyniumLoadFromIpynbTabAndStartSync 4<CR>', { noremap=true, silent = true })
-
+--- keymaps
+require('custom.keymaps.keymaps')
 
 
 -- [[ Highlight on yank ]]
@@ -675,14 +652,14 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp',priority=100}, ---Added priority
+    { name = 'nvim_lsp', priority = 100 }, ---Added priority
     { name = 'luasnip' },
     { name = 'path' },
-    {name="jupynium",priority=1000} --- Added this line
+    { name = "jupynium", priority = 1000 } --- Added this line
   },
   --- Added sorting
   sorting = {
-    priority_weight =1.0,
+    priority_weight = 1.0,
     comparators = {
       compare.score,
       compare.recently_used,
