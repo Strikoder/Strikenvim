@@ -288,6 +288,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -335,6 +336,17 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+
+--- Custom keymaps
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
+vim.keymap.set('n', '<F5>', ':JupyniumStartAndAttachToServer<CR>', { noremap=true, silent = true })
+vim.keymap.set('n', '<F2>', ':JupyniumLoadFromIpynbTabAndStartSync 2<CR>', { noremap=true, silent = true })
+vim.keymap.set('n', '<F3>', ':JupyniumLoadFromIpynbTabAndStartSync 3<CR>', { noremap=true, silent = true })
+vim.keymap.set('n', '<F4>', ':JupyniumLoadFromIpynbTabAndStartSync 4<CR>', { noremap=true, silent = true })
+
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
