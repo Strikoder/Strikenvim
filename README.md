@@ -10,7 +10,7 @@ This repo is meant to be used by **YOU** to begin your Neovim journey; remove th
 git clone https://github.com/Strikoder/Strikenvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-Check ![jupynium](https://github.com/kiyoon/jupynium.nvim) to be able to configure your ipynb notebooks with neovim
+Check (https://github.com/kiyoon/jupynium.nvim) to be able to configure your ipynb notebooks with neovim
 You might have some issues, try to install firefox like this:
 https://askubuntu.com/questions/1444962/how-do-i-install-firefox-in-wsl-when-it-requires-snap-but-snap-doesnt-work
 
