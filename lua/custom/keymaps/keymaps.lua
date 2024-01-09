@@ -26,3 +26,11 @@ keymap('n', '<F5>', ':JupyniumStartAndAttachToServer<CR>', { noremap = true, sil
 keymap('n', '<F2>', ':JupyniumLoadFromIpynbTabAndStartSync 2<CR>', { noremap = true, silent = true })
 keymap('n', '<F3>', ':JupyniumLoadFromIpynbTabAndStartSync 3<CR>', { noremap = true, silent = true })
 keymap('n', '<F4>', ':JupyniumLoadFromIpynbTabAndStartSync 4<CR>', { noremap = true, silent = true })
+
+-- These are in the main file, I didn't delete them there yet cause I need to add them to after/plugin/telescope.lua?
+--local builtin = require('telescope.builtin')
+--vim.keymap.set('n', '<leader>pf', builtin.find_files, {}) --project files
+--vim.keymap.set('n', '<C-p>', builtin.live_grep, {}) --Git files
+--vim.keymap.set('n', '<leader>ps', function()
+--builtin.grep_string({search=vim.fn.input("Grep>")});
+--end) --project search
