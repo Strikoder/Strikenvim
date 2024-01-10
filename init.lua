@@ -1,6 +1,7 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.python3_host_prog = "/home/strikoder/miniconda3/envs/myenv/bin/python"
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -174,7 +175,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -516,7 +517,6 @@ cmp.setup {
     { name = 'nvim_lsp', priority = 100 }, ---Added priority
     { name = 'luasnip' },
     { name = 'path' },
-    { name = "jupynium", priority = 1000 } --- Added this line
   },
   --- Added sorting
   sorting = {
@@ -534,15 +534,6 @@ cmp.setup {
 --
 --- My customizations
 
-require('custom.keymaps.keymaps')
-require('custom.settings.catppuccin')
+require('keymaps')
+require('plugins.catppuccin')
 vim.cmd('colorscheme catppuccin')
-require('custom.settings.jupynium')
-
--- Try with CursorColumn, Pmenu, Folded etc.
-vim.cmd [[
-hi! link JupyniumCodeCellSeparator CursorLine
-hi! link JupyniumMarkdownCellSeparator CursorLine
-hi! link JupyniumMarkdownCellContent CursorLine
-hi! link JupyniumMagicCommand Keyword
-]]

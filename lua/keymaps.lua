@@ -22,10 +22,6 @@ keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics l
 --- Custom keymaps
 keymap('n', '<C-d>', '<C-d>zz', { silent = true })
 keymap('n', '<C-u>', '<C-u>zz', { silent = true })
-keymap('n', '<F5>', ':JupyniumStartAndAttachToServer<CR>', { noremap = true, silent = true })
-keymap('n', '<F2>', ':JupyniumLoadFromIpynbTabAndStartSync 2<CR>', { noremap = true, silent = true })
-keymap('n', '<F3>', ':JupyniumLoadFromIpynbTabAndStartSync 3<CR>', { noremap = true, silent = true })
-keymap('n', '<F4>', ':JupyniumLoadFromIpynbTabAndStartSync 4<CR>', { noremap = true, silent = true })
 
 -- These are in the main file, I didn't delete them there yet cause I need to add them to after/plugin/telescope.lua?
 --local builtin = require('telescope.builtin')

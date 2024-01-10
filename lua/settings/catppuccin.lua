@@ -1,4 +1,4 @@
-require('catppuccin').setup({
+require('../plugins/catppuccin.lua').setup({
 	integrations = {
 		cmp = true,
 		gitsigns = true,
