@@ -2,6 +2,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.python3_host_prog = "/home/strikoder/miniconda3/envs/myenv/bin/python"
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -291,10 +292,13 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+
+
+vim.keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, { desc = '[p]roject [f]iles' })
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = '[g]it [f]iles' })
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
+
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
@@ -306,10 +310,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'python' }, -- 'javascript', 'typescript', 'vimdoc', 'vim', 'bash','c','cpp'
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
-    sync_install = false, -- Install languages synchronously (only applied to `ensure_installed`)
+    ensure_installed = { 'lua', 'python', 'cpp', 'c', 'typescript', 'javascript' }, -- 'javascript', 'typescript', 'vimdoc', 'vim', 'bash'
+    auto_install = true,
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
@@ -534,6 +536,6 @@ cmp.setup {
 --
 --- My customizations
 
-require('keymaps')
-require('plugins.catppuccin')
+require('remap')
+require('lua.plugins.catppuccin')
 vim.cmd('colorscheme catppuccin')

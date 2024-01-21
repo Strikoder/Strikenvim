@@ -1,5 +1,5 @@
 local keymap = vim.keymap.set
-
+vim.g.mapleader = " "
 
 -- [[ Basic Keymaps ]]
 
@@ -20,8 +20,17 @@ keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics l
 
 
 --- Custom keymaps
+-- Centering after ctrl+d/u
 keymap('n', '<C-d>', '<C-d>zz', { silent = true })
 keymap('n', '<C-u>', '<C-u>zz', { silent = true })
+
+-- Ex
+
+
+
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+
 
 -- These are in the main file, I didn't delete them there yet cause I need to add them to after/plugin/telescope.lua?
 --local builtin = require('telescope.builtin')
