@@ -15,11 +15,19 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 -- [[ Configure plugins ]]
 --  You can also configure plugins after the setup call, as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+
+  --- Undo Tree
+  'mbbill/undotree',
+  --- Harpoon
+  'ThePrimeagen/harpoon',
+  --- Autoclose
+  'm4xshen/autoclose.nvim',
   --- Background transparency
   'xiyaowong/transparent.nvim',
   -- Git related plugins
@@ -179,6 +187,10 @@ require('lazy').setup({
   { import = 'plugins' },
 }, {})
 
+--- autoclose setup
+require("autoclose").setup()
+
+
 -- [[ Setting options ]]
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -310,7 +322,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'python', 'cpp', 'c', 'typescript', 'javascript' }, -- 'javascript', 'typescript', 'vimdoc', 'vim', 'bash'
+    ensure_installed = { 'rust', 'lua', 'python', 'cpp', 'c', 'typescript', 'javascript', 'c_sharp' }, -- 'javascript', 'typescript', 'vimdoc', 'vim', 'bash'
+    sync_install = false,
     auto_install = true,
     highlight = { enable = true },
     indent = { enable = true },
@@ -355,15 +368,6 @@ vim.defer_fn(function()
         goto_previous_end = {
           ['[M'] = '@function.outer',
           ['[]'] = '@class.outer',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
         },
       },
     },
@@ -419,7 +423,6 @@ require('which-key').register {
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
@@ -537,5 +540,7 @@ cmp.setup {
 --- My customizations
 
 require('remap')
-require('lua.plugins.catppuccin')
+require('catppuccin')
 vim.cmd('colorscheme catppuccin')
+require('settings.harpoon')
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
