@@ -22,6 +22,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+
+  'christoomey/vim-tmux-navigator',
   --- Undo Tree
   'mbbill/undotree',
   --- Harpoon
@@ -61,6 +63,20 @@ require('lazy').setup({
   },
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+  },
+  keys = {
+    { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+    { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+    { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -318,6 +334,23 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
+-- Custom
+-- Resize window with tmux
+vim.api.nvim_set_keymap('n', '<C-Up>', ':resize +2<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<C-Down>', ':resize -2<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<C-Left>', ':vertical resize -2<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', { silent = true })
+-- Open terminal in a vertical split
+vim.api.nvim_set_keymap('n', '<leader>tv', ':rightbelow vsplit term://$SHELL<CR>', { silent = true })
+
+-- Open terminal in a horizontal split
+vim.api.nvim_set_keymap('n', '<leader>th', ':belowright split term://$SHELL<CR>', { silent = true })
+
+
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+
+
+
 -- [[ Configure Treesitter ]]
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
@@ -537,6 +570,7 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
+
 --- My customizations
 
 require('remap')
